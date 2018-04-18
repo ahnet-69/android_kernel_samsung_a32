@@ -6470,6 +6470,7 @@ static void perf_event_addr_filters_exec(struct perf_event *event, void *data)
 		if (filter->path.dentry) {
 			event->addr_filter_ranges[count].start = 0;
 			event->addr_filter_ranges[count].size = 0;
+			event->addr_filters_offs[count] = 0;
 			restart++;
 		}
 
