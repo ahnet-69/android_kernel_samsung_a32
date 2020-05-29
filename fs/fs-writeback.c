@@ -1104,16 +1104,6 @@ static void redirty_tail_locked(struct inode *inode, struct bdi_writeback *wb)
 	}
 	inode_io_list_move_locked(inode, wb, &wb->b_dirty);
 	inode->i_state &= ~I_SYNC_QUEUED;
-<<<<<<< HEAD
-}
-
-static void redirty_tail(struct inode *inode, struct bdi_writeback *wb)
-{
-	spin_lock(&inode->i_lock);
-	redirty_tail_locked(inode, wb);
-	spin_unlock(&inode->i_lock);
-=======
->>>>>>> 856fa4ebf57c (writeback: Avoid skipping inode writeback)
 }
 
 static void redirty_tail(struct inode *inode, struct bdi_writeback *wb)
@@ -1164,7 +1154,7 @@ static bool inode_dirtied_after(struct inode *inode, unsigned long t)
  */
 static int move_expired_inodes(struct list_head *delaying_queue,
 			       struct list_head *dispatch_queue,
-			       unsigned long dirtied_before)
+			       int flags, unsigned long dirtied_before)
 {
 	LIST_HEAD(tmp);
 	struct list_head *pos, *node;
@@ -1180,11 +1170,8 @@ static int move_expired_inodes(struct list_head *delaying_queue,
 		list_move(&inode->i_io_list, &tmp);
 		moved++;
 		spin_lock(&inode->i_lock);
-<<<<<<< HEAD
-=======
 		if (flags & EXPIRE_DIRTY_ATIME)
 			inode->i_state |= I_DIRTY_TIME_EXPIRED;
->>>>>>> 856fa4ebf57c (writeback: Avoid skipping inode writeback)
 		inode->i_state |= I_SYNC_QUEUED;
 		spin_unlock(&inode->i_lock);
 		if (sb_is_blkdev_sb(inode->i_sb))
@@ -1232,11 +1219,11 @@ static void queue_io(struct bdi_writeback *wb, struct wb_writeback_work *work,
 
 	assert_spin_locked(&wb->list_lock);
 	list_splice_init(&wb->b_more_io, &wb->b_io);
-	moved = move_expired_inodes(&wb->b_dirty, &wb->b_io, dirtied_before);
+	moved = move_expired_inodes(&wb->b_dirty, &wb->b_io, 0, dirtied_before);
 	if (!work->for_sync)
 		time_expire_jif = jiffies - dirtytime_expire_interval * HZ;
 	moved += move_expired_inodes(&wb->b_dirty_time, &wb->b_io,
-				     time_expire_jif);
+				     EXPIRE_DIRTY_ATIME, time_expire_jif);
 	if (moved)
 		wb_io_lists_populated(wb);
 	trace_writeback_queue_io(wb, work, dirtied_before, moved);
