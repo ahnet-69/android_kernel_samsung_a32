@@ -293,7 +293,11 @@ struct pcmcia_device_id {
 #define INPUT_DEVICE_ID_LED_MAX		0x0f
 #define INPUT_DEVICE_ID_SND_MAX		0x07
 #define INPUT_DEVICE_ID_FF_MAX		0x7f
+<<<<<<< HEAD
 #define INPUT_DEVICE_ID_SW_MAX		0x3f
+=======
+#define INPUT_DEVICE_ID_SW_MAX		0x10
+>>>>>>> d8b49f70fffa (Input: add `SW_MACHINE_COVER`)
 #define INPUT_DEVICE_ID_PROP_MAX	0x1f
 
 #define INPUT_DEVICE_ID_MATCH_BUS	1
