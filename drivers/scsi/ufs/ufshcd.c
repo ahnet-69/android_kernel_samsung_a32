@@ -1934,6 +1934,7 @@ unblock_reqs:
 int ufshcd_hold(struct ufs_hba *hba, bool async)
 {
 	int rc = 0;
+	bool flush_result;
 	unsigned long flags;
 	bool wq;
 	u64 s_time;
@@ -1967,14 +1968,8 @@ start:
 				break;
 			}
 			spin_unlock_irqrestore(hba->host->host_lock, flags);
-			/* MTK PATCH */
-			/*
-			 * During suspend flow the link may already in h8,
-			 * but no ungate_work bring back to link up sate.
-			 * So just return when work is already idle.
-			 */
-			wq = flush_work(&hba->clk_gating.ungate_work);
-			if (!wq)
+			flush_result = flush_work(&hba->clk_gating.ungate_work);
+			if (hba->clk_gating.is_suspended && !flush_result)
 				goto out;
 			spin_lock_irqsave(hba->host->host_lock, flags);
 			goto start;
