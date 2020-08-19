@@ -1902,9 +1902,9 @@ static int ep_loop_check_proc(void *priv, void *cookie, int call_nests)
 			 * during ep_insert().
 			 */
 			if (list_empty(&epi->ffd.file->f_tfile_llink)) {
-				if (get_file_rcu(epi->ffd.file))
-					list_add(&epi->ffd.file->f_tfile_llink,
-						 &tfile_check_list);
+				get_file(epi->ffd.file);
+				list_add(&epi->ffd.file->f_tfile_llink,
+					 &tfile_check_list);
 			}
 		}
 	}
@@ -2102,6 +2102,7 @@ SYSCALL_DEFINE4(epoll_ctl, int, epfd, int, op, int, fd,
 				error = -ELOOP;
 				if (ep_loop_check(ep, tf.file) != 0)
 					goto error_tgt_fput;
+				}
 			} else {
 				get_file(tf.file);
 				list_add(&tf.file->f_tfile_llink,
