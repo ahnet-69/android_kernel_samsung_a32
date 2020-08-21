@@ -1,0 +1,42 @@
+From 0366af83bdb5c09446f637622579e680dab72168 Mon Sep 17 00:00:00 2001
+From: TALU <taluemail272@gmail.com>
+Date: Fri, 21 Aug 2020 12:14:23 +0100
+Subject: [PATCH] Revert "arm64: sigcontext: use standard __uint128_t type for
+ vregs in struct fpsimd_context."
+
+This reverts commit 447dabc1fedbafb1f9894e0c3054bf546a1af913
+as it causes this issue with the Android build system:
+
+out/soong/.intermediates/vendor/lineage/build/soong/generated_kernel_includes/ge
+n/usr/include/asm/sigcontext.h:53:2: error: unknown type name '__uint128_t'
+        __uint128_t vregs[32];
+        ^
+1 error generated.
+---
+ arch/arm64/include/uapi/asm/sigcontext.h | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/arch/arm64/include/uapi/asm/sigcontext.h b/arch/arm64/include/uapi/asm/sigcontext.h
+index 0c796c795dbe..3fc987d2f3f1 100644
+--- a/arch/arm64/include/uapi/asm/sigcontext.h
++++ b/arch/arm64/include/uapi/asm/sigcontext.h
+@@ -68,13 +68,18 @@ struct _aarch64_ctx {
+ 	__u32 size;
+ };
+ 
++typedef struct {
++	__u64 a;
++	__u64 b;
++} ___uint128_t;
++
+ #define FPSIMD_MAGIC	0x46508001
+ 
+ struct fpsimd_context {
+ 	struct _aarch64_ctx head;
+ 	__u32 fpsr;
+ 	__u32 fpcr;
+-	__uint128_t vregs[32];
++	___uint128_t vregs[32];
+ };
+ 
+ /*
