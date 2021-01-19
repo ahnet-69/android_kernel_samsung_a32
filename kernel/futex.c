@@ -2517,8 +2517,7 @@ retry:
 
 		if (__rt_mutex_futex_trylock(&pi_state->pi_mutex)) {
 			/* We got the lock. pi_state is correct. Tell caller. */
-			ret = 1;
-			goto out_unlock;
+			return 1;
 		}
 
 		/*
@@ -2545,8 +2544,7 @@ retry:
 			 * We raced against a concurrent self; things are
 			 * already fixed up. Nothing to do.
 			 */
-			ret = 1;
-			goto out_unlock;
+			return 1;
 		}
 		newowner = argowner;
 	}
@@ -2618,10 +2616,8 @@ handle_err:
 	/*
 	 * Check if someone else fixed it for us:
 	 */
-	if (pi_state->owner != oldowner) {
-		ret = argowner == current;
-		goto out_unlock;
-	}
+	if (pi_state->owner != oldowner)
+		return argowner == current;
 
 	/* Retry if err was -EAGAIN or the fault in succeeded */
 	if (!err)
