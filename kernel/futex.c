@@ -2517,7 +2517,8 @@ retry:
 
 		if (__rt_mutex_futex_trylock(&pi_state->pi_mutex)) {
 			/* We got the lock. pi_state is correct. Tell caller. */
-			return 1;
+			ret = 1;
+			goto out_unlock;
 		}
 
 		/*
@@ -2544,7 +2545,8 @@ retry:
 			 * We raced against a concurrent self; things are
 			 * already fixed up. Nothing to do.
 			 */
-			return 1;
+			ret = 1;
+			goto out_unlock;
 		}
 		newowner = argowner;
 	}
@@ -2616,8 +2618,10 @@ handle_err:
 	/*
 	 * Check if someone else fixed it for us:
 	 */
-	if (pi_state->owner != oldowner)
-		return argowner == current;
+	if (pi_state->owner != oldowner) {
+		ret = argowner == current;
+		goto out_unlock;
+	}
 
 	/* Retry if err was -EAGAIN or the fault in succeeded */
 	if (!err)
@@ -3424,6 +3428,10 @@ static int futex_wait_requeue_pi(u32 __user *uaddr, unsigned int flags,
 		if (q.pi_state && (q.pi_state->owner != current)) {
 			spin_lock(q.lock_ptr);
 			ret = fixup_pi_state_owner(uaddr2, &q, current);
+			if (ret < 0 && rt_mutex_owner(&q.pi_state->pi_mutex) == current) {
+				pi_state = q.pi_state;
+				get_pi_state(pi_state);
+			}
 			/*
 			 * Drop the reference to the pi state which
 			 * the requeue_pi() code acquired for us.
