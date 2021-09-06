@@ -39,7 +39,7 @@ __attribute__ ((weak))
 unsigned int pmic_read_interface_nolock(unsigned int RegNum, unsigned int *val,
 	unsigned int MASK, unsigned int SHIFT)
 {
-	printk_deferred("[name:spm&]NO %s !!!\n", __func__);
+	pr_debug("[name:spm&]NO %s !!!\n", __func__);
 	return 0;
 }
 
@@ -47,14 +47,14 @@ __attribute__ ((weak))
 unsigned int pmic_config_interface(unsigned int RegNum, unsigned int val,
 	unsigned int MASK, unsigned int SHIFT)
 {
-	printk_deferred("[name:spm&]NO %s !!!\n", __func__);
+	pr_debug("[name:spm&]NO %s !!!\n", __func__);
 	return 0;
 }
 __attribute__ ((weak))
 unsigned int pmic_config_interface_nolock(unsigned int RegNum, unsigned int val,
 	unsigned int MASK, unsigned int SHIFT)
 {
-	printk_deferred("[name:spm&]NO %s !!!\n", __func__);
+	pr_debug("[name:spm&]NO %s !!!\n", __func__);
 	return 0;
 }
 #endif /* CONFIG_FPGA_EARLY_PORTING */
@@ -68,7 +68,7 @@ void spm_dump_world_clk_cntcv(void)
 	wlk_cntcv_l = _golden_read_reg(WORLD_CLK_CNTCV_L);
 	wlk_cntcv_h = _golden_read_reg(WORLD_CLK_CNTCV_H);
 
-	printk_deferred("[name:spm&][SPM] wlk_cntcv_l = 0x%x, wlk_cntcv_h = 0x%x\n",
+	pr_debug("[name:spm&][SPM] wlk_cntcv_l = 0x%x, wlk_cntcv_h = 0x%x\n",
 		wlk_cntcv_l, wlk_cntcv_h);
 }
 
@@ -82,7 +82,7 @@ void spm_set_sysclk_settle(void)
 	/* md_settle is keyword for suspend status */
 	aee_sram_printk("md_settle = %u, settle = %u\n",
 		SPM_SYSCLK_SETTLE, settle);
-	printk_deferred("[name:spm&][SPM] md_settle = %u, settle = %u\n",
+	pr_debug("[name:spm&][SPM] md_settle = %u, settle = %u\n",
 		SPM_SYSCLK_SETTLE, settle);
 }
 
@@ -118,7 +118,7 @@ void spm_suspend_pre_process(int cmd, struct pwr_ctrl *pwrctrl)
 	ret = spm_to_sspm_command(cmd, &spm_d);
 	if (ret < 0) {
 		aee_sram_printk("ret %d", ret);
-		printk_deferred("[name:spm&][SPM] ret %d", ret);
+		pr_debug("[name:spm&][SPM] ret %d", ret);
 	}
 #endif
 
@@ -158,7 +158,7 @@ void spm_suspend_post_process(int cmd, struct pwr_ctrl *pwrctrl)
 	ret = spm_to_sspm_command(cmd, &spm_d);
 	if (ret < 0) {
 		aee_sram_printk("ret %d", ret);
-		printk_deferred("[name:spm&][SPM] ret %d", ret);
+		pr_debug("[name:spm&][SPM] ret %d", ret);
 	}
 #endif /* CONFIG_MTK_TINYSYS_SSPM_SUPPORT */
 }
