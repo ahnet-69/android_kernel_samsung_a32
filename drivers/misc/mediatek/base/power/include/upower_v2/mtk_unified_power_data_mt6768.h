@@ -1568,9 +1568,9 @@ struct upower_tbl upower_tbl_cluster_l_G75 = {
 
 struct upower_tbl upower_tbl_b_G75 = {
 	.row = {
-		{.cap = 504, .volt = 67500, .dyn_pwr = 111920,
+		{.cap = 395, .volt = 62500, .dyn_pwr = 111920,
 		.lkg_pwr = {112296, 112296, 112296, 112296, 112296, 112296} },
-		{.cap = 532, .volt = 70000, .dyn_pwr = 128602,
+		{.cap = 504, .volt = 67500, .dyn_pwr = 128602,
 		.lkg_pwr = {117734, 117734, 117734, 117734, 117734, 117734} },
 		{.cap = 580, .volt = 73125, .dyn_pwr = 153126,
 		.lkg_pwr = {125658, 125658, 125658, 125658, 125658, 125658} },
