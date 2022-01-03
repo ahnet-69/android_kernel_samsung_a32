@@ -24,8 +24,8 @@ void cmdq_sec_mtee_setup_context(struct cmdq_sec_mtee_context *tee)
 	struct arm_smccc_res res;
 
 	memset(tee, 0, sizeof(*tee));
-	strncpy(tee->ta_uuid, ta_uuid, sizeof(ta_uuid));
-	strncpy(tee->wsm_uuid, wsm_uuid, sizeof(wsm_uuid));
+	strncpy(tee->ta_uuid, ta_uuid, sizeof(tee->ta_uuid));
+	strncpy(tee->wsm_uuid, wsm_uuid, sizeof(tee->wsm_uuid));
 
 	arm_smccc_smc(0xBC00000B, 1, 0, 0, 0, 0, 0, 0, &res);
 	if (res.a0 == 1)
