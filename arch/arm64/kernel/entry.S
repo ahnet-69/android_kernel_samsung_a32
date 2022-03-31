@@ -1101,6 +1101,7 @@ alternative_else_nop_endif
 	.macro tramp_ventry, vector_start, regsize, kpti, bhb
 	.align	7
 1:
+	.if	\kpti == 1
 	.if	\regsize == 64
 	msr	tpidrro_el0, x30	// Restored in kernel_ventry
 	.endif
@@ -1133,7 +1134,6 @@ alternative_insn isb, nop, ARM64_WORKAROUND_QCOM_FALKOR_E1003
 	tramp_data_read_var	x30, vectors
 	prfm	plil1strm, [x30, #(1b - \vector_start)]
 	msr	vbar_el1, x30
-	add	x30, x30, #(1b - \vector_start + 4)
 	isb
 	.else
 	ldr	x30, =vectors
