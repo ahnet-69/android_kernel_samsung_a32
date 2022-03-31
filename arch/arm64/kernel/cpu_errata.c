@@ -1134,3 +1134,6 @@ void __init spectre_bhb_patch_loop_iter(struct alt_instr *alt,
 					 AARCH64_INSN_MOVEWIDE_ZERO);
 	*updptr++ = cpu_to_le32(insn);
 }
+
+void kvm_setup_bhb_slot(const char *hyp_vecs_start) { };
+#endif
