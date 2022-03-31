@@ -1079,7 +1079,7 @@ alternative_else_nop_endif
 	.endm
 
 	.macro tramp_data_page	dst
-	adr_l	\dst, .entry.tramp.text
+	adr     \dst, .entry.tramp.text
 	sub	\dst, \dst, PAGE_SIZE
 	.endm
 
@@ -1128,6 +1128,7 @@ alternative_else_nop_endif
 	b	.
 2:
 	tramp_map_kernel	x30
+	tramp_data_page		x30
 alternative_insn isb, nop, ARM64_WORKAROUND_QCOM_FALKOR_E1003
 	tramp_data_read_var	x30, vectors
 	prfm	plil1strm, [x30, #(1b - \vector_start)]
