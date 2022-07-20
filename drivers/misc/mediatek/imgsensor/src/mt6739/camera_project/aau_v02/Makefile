@@ -39,7 +39,3 @@ endif
 $(foreach drv,$(subst $\",,$(CONFIG_CUSTOM_KERNEL_IMGSENSOR)),$(eval $(call FILTER_PROJECT_DRV,$(drv))))
 
 obj-y += $(project_drv)
-
-ifneq ($(project_drv),)
-$(info imgsensor drv by project $(project_drv))
-endif

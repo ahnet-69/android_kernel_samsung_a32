@@ -17,8 +17,6 @@
 
 MTK_PLATFORM := $(subst ",,$(CONFIG_MTK_PLATFORM))
 
-$(info Y2K2 A31)
-
 ifdef CONFIG_CAMERA_AAT_V31
 ARCH_MTK_PROJECT := aat_v31
 else
@@ -30,7 +28,6 @@ IMGSENSOR_DRIVER_PATH  := $(srctree)/drivers/misc/mediatek/imgsensor/src
 define FILTER_PROJECT_DRV
 ifneq ($(wildcard $(IMGSENSOR_DRIVER_PATH)/$(MTK_PLATFORM)/camera_project/$(ARCH_MTK_PROJECT)/$(1)),)
 project_drv += $(1)/
-$(info Y2K2 $(1))
 endif
 endef
 
@@ -43,7 +40,3 @@ endif
 $(foreach drv,$(subst $\",,$(CONFIG_CUSTOM_KERNEL_IMGSENSOR)),$(eval $(call FILTER_PROJECT_DRV,$(drv))))
 
 obj-y += $(project_drv)
-
-ifneq ($(project_drv),)
-$(info imgsensor drv by project $(project_drv))
-endif

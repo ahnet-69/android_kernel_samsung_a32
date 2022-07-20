@@ -1,5 +1,3 @@
-$(info mali MTK evironment, building r18p0 DDK)
-
 MTK_TOP = $(srctree)/drivers/misc/mediatek/
 
 # build support for a ARM Mali Midgard GPU
@@ -8,9 +6,6 @@ CONFIG_MALI_MIDGARD := y
 # use mtk platform
 CONFIG_MALI_PLATFORM_THIRDPARTY := y
 CONFIG_MALI_PLATFORM_THIRDPARTY_NAME := $(CONFIG_MTK_PLATFORM)
-
-$(info mtk-Kbuild CONFIG_MALI_PLATFORM_THIRDPARTY := $(CONFIG_MALI_PLATFORM_THIRDPARTY))
-$(info mtk-Kbuild CONFIG_MALI_PLATFORM_THIRDPARTY_NAME := $(CONFIG_MALI_PLATFORM_THIRDPARTY_NAME))
 
 CONFIG_MALI_DEBUG := y
 
