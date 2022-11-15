@@ -1,0 +1,61 @@
+From 9aeeb9f9b3003ba56ba57badaaa3d0466f7aafa1 Mon Sep 17 00:00:00 2001
+From: haridhayal11 <haridhayal@gmail.com>
+Date: Tue, 15 Nov 2022 16:49:07 +0530
+Subject: [PATCH] configs: Use a timer frequency of 100 Hz The use of high CPU
+ frequencies combined with a large number of cores makes latency decent with a
+ 100 Hz scheduler tick. Reducing the tick rate from 250 Hz to 100 Hz improves
+ throughput and significantly reduces the number of interrupts firing off per
+ second, improving power consumption.
+
+Co-authored-by: Sultan Alsawaf <sultan@kerneltoast.com>
+---
+ arch/arm64/configs/hari_o1s_defconfig | 4 ++--
+ arch/arm64/configs/hari_p3s_defconfig | 4 ++--
+ arch/arm64/configs/hari_t2s_defconfig | 4 ++--
+ 3 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/arch/arm64/configs/hari_o1s_defconfig b/arch/arm64/configs/hari_o1s_defconfig
+index bf1432d362ab..e3586167b1e6 100755
+--- a/arch/arm64/configs/hari_o1s_defconfig
++++ b/arch/arm64/configs/hari_o1s_defconfig
+@@ -368,8 +368,8 @@ CONFIG_VENDOR_NR_CPUS=8
+ CONFIG_HOTPLUG_CPU=y
+ # CONFIG_NUMA is not set
+ CONFIG_HOLES_IN_ZONE=y
+-# CONFIG_HZ_100 is not set
+-CONFIG_HZ_250=y
++CONFIG_HZ_100=y
++# CONFIG_HZ_250=y
+ # CONFIG_HZ_300 is not set
+ # CONFIG_HZ_1000 is not set
+ CONFIG_HZ=250
+diff --git a/arch/arm64/configs/hari_p3s_defconfig b/arch/arm64/configs/hari_p3s_defconfig
+index aa9c3cc59662..7b0f3325cd27 100755
+--- a/arch/arm64/configs/hari_p3s_defconfig
++++ b/arch/arm64/configs/hari_p3s_defconfig
+@@ -368,8 +368,8 @@ CONFIG_VENDOR_NR_CPUS=8
+ CONFIG_HOTPLUG_CPU=y
+ # CONFIG_NUMA is not set
+ CONFIG_HOLES_IN_ZONE=y
+-# CONFIG_HZ_100 is not set
+-CONFIG_HZ_250=y
++CONFIG_HZ_100=y
++# CONFIG_HZ_250=y
+ # CONFIG_HZ_300 is not set
+ # CONFIG_HZ_1000 is not set
+ CONFIG_HZ=250
+diff --git a/arch/arm64/configs/hari_t2s_defconfig b/arch/arm64/configs/hari_t2s_defconfig
+index 110d7d6a4e4f..1e1105f0a7f9 100755
+--- a/arch/arm64/configs/hari_t2s_defconfig
++++ b/arch/arm64/configs/hari_t2s_defconfig
+@@ -368,8 +368,8 @@ CONFIG_VENDOR_NR_CPUS=8
+ CONFIG_HOTPLUG_CPU=y
+ # CONFIG_NUMA is not set
+ CONFIG_HOLES_IN_ZONE=y
+-# CONFIG_HZ_100 is not set
+-CONFIG_HZ_250=y
++CONFIG_HZ_100=y
++# CONFIG_HZ_250=y
+ # CONFIG_HZ_300 is not set
+ # CONFIG_HZ_1000 is not set
+ CONFIG_HZ=250
