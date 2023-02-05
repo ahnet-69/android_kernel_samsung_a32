@@ -118,7 +118,9 @@
 #include <net/sock_reuseport.h>
 #include <net/addrconf.h>
 // SEC_PRODUCT_FEATURE_KNOX_SUPPORT_NPA {
+#ifdef CONFIG_KNOX_NCM
 #include <net/ncm.h>
+#endif
 // SEC_PRODUCT_FEATURE_KNOX_SUPPORT_NPA }
 
 #include <perf_tracker_internal.h>
@@ -2196,16 +2198,19 @@ int __udp4_lib_rcv(struct sk_buff *skb, struct udp_table *udptable,
 		struct dst_entry *dst = skb_dst(skb);
 		int ret;
 		// SEC_PRODUCT_FEATURE_KNOX_SUPPORT_NPA {
+#ifdef CONFIG_KNOX_NCM
 		struct nf_conn *ct = NULL;
 		enum ip_conntrack_info ctinfo;
 		struct nf_conntrack_tuple *tuple = NULL;
 		char srcaddr[INET6_ADDRSTRLEN_NAP];
 		char dstaddr[INET6_ADDRSTRLEN_NAP];
+#endif
 		// SEC_PRODUCT_FEATURE_KNOX_SUPPORT_NPA }
 
 		if (unlikely(sk->sk_rx_dst != dst))
 			udp_sk_rx_dst_set(sk, dst);
 		// SEC_PRODUCT_FEATURE_KNOX_SUPPORT_NPA {
+#ifdef CONFIG_KNOX_NCM
 		/* function to handle open flows with incoming udp packets */
 		if (check_ncm_flag()) {
 			if ( (sk) && (sk->sk_protocol == IPPROTO_UDP) ) {
@@ -2247,11 +2252,12 @@ int __udp4_lib_rcv(struct sk_buff *skb, struct udp_table *udptable,
 								memcpy(ct->parent_process_name,sk->dns_process_name,sizeof(ct->parent_process_name)-1);
 							}
 							knox_collect_conntrack_data(ct, NCM_FLOW_TYPE_OPEN, 3);
-						}	
+						}
 					}
 				}
 			}
 		}
+#endif
 		// SEC_PRODUCT_FEATURE_KNOX_SUPPORT_NPA }
 
 		ret = udp_unicast_rcv_skb(sk, skb, uh);
@@ -2266,6 +2272,7 @@ int __udp4_lib_rcv(struct sk_buff *skb, struct udp_table *udptable,
 	sk = __udp4_lib_lookup_skb(skb, uh->source, uh->dest, udptable);
 	if (sk) {
 		// SEC_PRODUCT_FEATURE_KNOX_SUPPORT_NPA {
+#ifdef CONFIG_KNOX_NCM
 		struct nf_conn *ct = NULL;
 		enum ip_conntrack_info ctinfo;
 		struct nf_conntrack_tuple *tuple = NULL;
@@ -2317,6 +2324,7 @@ int __udp4_lib_rcv(struct sk_buff *skb, struct udp_table *udptable,
 				}
 			}
 		}
+#endif
 		// SEC_PRODUCT_FEATURE_KNOX_SUPPORT_NPA }
 		return udp_unicast_rcv_skb(sk, skb, uh);
 	}
