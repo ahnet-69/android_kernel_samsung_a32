@@ -223,7 +223,6 @@ source "drivers/sensors/Kconfig"
 
 source "drivers/spu_verify/Kconfig"
 
-source "drivers/kperfmon/Kconfig"
 source "drivers/security/samsung/icdrv/Kconfig" # ADDED BY LEGO AUTOMATICALLY: DO NOT SUBMIT
 source "drivers/misc/drb/Kconfig" # ADDED BY LEGO AUTOMATICALLY: DO NOT SUBMIT
 source "drivers/vibrator/common/Kconfig" # ADDED BY LEGO AUTOMATICALLY: DO NOT SUBMIT
