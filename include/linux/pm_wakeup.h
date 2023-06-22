@@ -23,6 +23,7 @@
 #define _LINUX_PM_WAKEUP_H
 
 #include <linux/types.h>
+#include <linux/device.h>
 
 struct wake_irq;
 
