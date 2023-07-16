@@ -3704,13 +3704,14 @@ static void ext4_resetent(handle_t *handle, struct ext4_renament *ent,
 {
 	struct ext4_renament old = *ent;
 	int retval = 0;
+        ext4_lblk_t lblk;
 
 	/*
 	 * old->de could have moved from under us during make indexed dir,
 	 * so the old->de may no longer valid and need to find it again
 	 * before reset old inode info.
 	 */
-	old.bh = ext4_find_entry(old.dir, &old.dentry->d_name, &old.de, NULL);
+	old.bh = ext4_find_entry(old.dir, &old.dentry->d_name, &old.de, NULL, &lblk);
 	if (IS_ERR(old.bh))
 		retval = PTR_ERR(old.bh);
 	if (!old.bh)
