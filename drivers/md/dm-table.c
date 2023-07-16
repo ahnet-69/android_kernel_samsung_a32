@@ -1912,18 +1912,6 @@ void dm_table_set_restrictions(struct dm_table *t, struct request_queue *q,
 	dm_calculate_supported_crypto_modes(t, q);
 
 	/*
-	 * Some devices don't use blk_integrity but still want stable pages
-	 * because they do their own checksumming.
-	 * If any underlying device requires stable pages, a table must require
-	 * them as well.  Only targets that support iterate_devices are considered:
-	 * don't want error, zero, etc to require stable pages.
-	 */
-	if (dm_table_any_dev_attr(t, device_requires_stable_pages, NULL))
-		q->backing_dev_info->capabilities |= BDI_CAP_STABLE_WRITES;
-	else
-		q->backing_dev_info->capabilities &= ~BDI_CAP_STABLE_WRITES;
-
-	/*
 	 * Determine whether or not this queue's I/O timings contribute
 	 * to the entropy pool, Only request-based targets use this.
 	 * Clear QUEUE_FLAG_ADD_RANDOM if any underlying device does not
