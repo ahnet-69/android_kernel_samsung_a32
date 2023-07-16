@@ -161,9 +161,11 @@ enum memcg_kmem_state {
 #define MEMCG_HEIMDALL_SHRINK_FILE 2
 void forced_shrink_node_memcg(struct pglist_data *pgdat, struct mem_cgroup *memcg,
 			      int type, unsigned long nr_requested);
+#endif
+
 #if defined(CONFIG_SMP)
 struct memcg_padding {
-	char x[0];
+       char x[0];
 } ____cacheline_internodealigned_in_smp;
 #define MEMCG_PADDING(name)      struct memcg_padding name;
 #else
