@@ -47,11 +47,11 @@
 #include <net/inet_ecn.h>
 #include <net/dst_metadata.h>
 
-void udp_v6_early_demux(struct sk_buff *);
-void tcp_v6_early_demux(struct sk_buff *);
 static void ip6_rcv_finish_core(struct net *net, struct sock *sk,
 				struct sk_buff *skb)
 {
+	void (*edemux)(struct sk_buff *skb);
+
 	if (net->ipv4.sysctl_ip_early_demux && !skb_dst(skb) && skb->sk == NULL) {
 		const struct inet6_protocol *ipprot;
 
@@ -59,7 +59,6 @@ static void ip6_rcv_finish_core(struct net *net, struct sock *sk,
 		if (ipprot && (edemux = READ_ONCE(ipprot->early_demux)))
 			edemux(skb);
 	}
-
 	if (!skb_valid_dst(skb))
 		ip6_route_input(skb);
 }
