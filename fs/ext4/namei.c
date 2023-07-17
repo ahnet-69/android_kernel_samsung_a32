@@ -1262,8 +1262,7 @@ static inline int search_dirblock(struct buffer_head *bh,
  */
 static int dx_make_map(struct inode *dir, struct buffer_head *bh,
 		       struct dx_hash_info *hinfo,
-		       struct dx_map_entry *map_tail,
-			ext4_lblk_t lblk)
+		       struct dx_map_entry *map_tail)
 {
 	int count = 0;
 	struct ext4_dir_entry_2 *de = (struct ext4_dir_entry_2 *)bh->b_data;
@@ -1275,8 +1274,8 @@ static int dx_make_map(struct inode *dir, struct buffer_head *bh,
 		buflen -= sizeof(struct ext4_dir_entry_tail);
 
 	while ((char *) de < base + buflen) {
-		if (__ext4_check_dir_entry(dir, NULL, de, bh, base, buflen,
-					lblk, ((char *)de) - base))
+		if (ext4_check_dir_entry(dir, NULL, de, bh, base, buflen,
+					 ((char *)de) - base))
 			return -EFSCORRUPTED;
 		if (de->name_len && de->inode) {
 			if (ext4_hash_in_dirent(dir))
@@ -3613,7 +3612,7 @@ static struct buffer_head *ext4_get_first_dir_block(handle_t *handle,
 					struct inode *inode,
 					int *retval,
 					struct ext4_dir_entry_2 **parent_de,
-					int *inlined, ext4_lblk_t lblk)
+					int *inlined)
 {
 	struct buffer_head *bh;
 
@@ -3631,8 +3630,8 @@ static struct buffer_head *ext4_get_first_dir_block(handle_t *handle,
 		}
 
 		de = (struct ext4_dir_entry_2 *) bh->b_data;
-		if (__ext4_check_dir_entry(inode, NULL, de, bh, bh->b_data,
-					 bh->b_size, lblk, 0) ||
+		if (ext4_check_dir_entry(inode, NULL, de, bh, bh->b_data,
+					 bh->b_size, 0) ||
 		    le32_to_cpu(de->inode) != inode->i_ino ||
 		    strcmp(".", de->name)) {
 			EXT4_ERROR_INODE(inode, "directory missing '.'");
@@ -3643,8 +3642,8 @@ static struct buffer_head *ext4_get_first_dir_block(handle_t *handle,
 		offset = ext4_rec_len_from_disk(de->rec_len,
 						inode->i_sb->s_blocksize);
 		de = ext4_next_entry(de, inode->i_sb->s_blocksize);
-		if (__ext4_check_dir_entry(inode, NULL, de, bh, bh->b_data,
-					 bh->b_size, lblk, offset) ||
+		if (ext4_check_dir_entry(inode, NULL, de, bh, bh->b_data,
+					 bh->b_size, offset) ||
 		    le32_to_cpu(de->inode) == 0 || strcmp("..", de->name)) {
 			EXT4_ERROR_INODE(inode, "directory missing '..'");
 			brelse(bh);
