@@ -94,7 +94,6 @@ static void release_urb_ctx(struct snd_urb_ctx *u)
 			usb_free_coherent(u->ep->chip->dev, u->buffer_size,
 					  u->urb->transfer_buffer,
 					  u->urb->transfer_dma);
-	}
 	usb_free_urb(u->urb);
 	u->urb = NULL;
 	u->buffer_size = 0;
