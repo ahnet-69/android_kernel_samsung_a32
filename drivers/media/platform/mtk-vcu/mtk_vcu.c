@@ -1226,6 +1226,40 @@ void vcu_put_file_lock(void)
 }
 EXPORT_SYMBOL_GPL(vcu_put_file_lock);
 
+void vcu_get_gce_lock(struct platform_device *pdev, unsigned long codec_type)
+{
+	struct mtk_vcu *vcu = NULL;
+
+	if (pdev == NULL) {
+		pr_info("[VCU] %s platform device is null.\n", __func__);
+		return;
+	}
+	if (codec_type >= VCU_CODEC_MAX) {
+		pr_info("[VCU] %s invalid codec type %ld.\n", __func__, codec_type);
+		return;
+	}
+	vcu = platform_get_drvdata(pdev);
+	mutex_lock(&vcu->vcu_gce_mutex[codec_type]);
+}
+EXPORT_SYMBOL_GPL(vcu_get_gce_lock);
+
+void vcu_put_gce_lock(struct platform_device *pdev, unsigned long codec_type)
+{
+	struct mtk_vcu *vcu = NULL;
+
+	if (pdev == NULL) {
+		pr_info("[VCU] %s platform device is null.\n", __func__);
+		return;
+	}
+	if (codec_type >= VCU_CODEC_MAX) {
+		pr_info("[VCU] %s invalid codec type %ld.\n", __func__, codec_type);
+		return;
+	}
+	vcu = platform_get_drvdata(pdev);
+	mutex_unlock(&vcu->vcu_gce_mutex[codec_type]);
+}
+EXPORT_SYMBOL_GPL(vcu_put_gce_lock);
+
 int vcu_get_sig_lock(unsigned long *flags)
 {
 	return spin_trylock_irqsave(&vcu_ptr->vpud_sig_lock, *flags);
@@ -2006,6 +2040,12 @@ static int mtk_vcu_write(const char *val, const struct kernel_param *kp)
 
 	return 0;
 }
+
+int vcu_set_log(const char *val)
+{
+	return mtk_vcu_write(val, NULL);
+}
+EXPORT_SYMBOL_GPL(vcu_set_log);
 
 static struct kernel_param_ops log_param_ops = {
 	.set = mtk_vcu_write,
