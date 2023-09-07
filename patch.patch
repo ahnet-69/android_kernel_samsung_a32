@@ -1,0 +1,420 @@
+diff --git a/arch/arm64/configs/a32_defconfig b/arch/arm64/configs/a32_defconfig
+index ee3c7ba7a878..486f1d48c881 100644
+--- a/arch/arm64/configs/a32_defconfig
++++ b/arch/arm64/configs/a32_defconfig
+@@ -5654,8 +5654,8 @@ CONFIG_SECURITY_SELINUX=y
+ # CONFIG_SECURITY_SELINUX_BOOTPARAM is not set
+ # CONFIG_SECURITY_SELINUX_DISABLE is not set
+ CONFIG_SECURITY_SELINUX_DEVELOP=y
+-# CONFIG_ALWAYS_ENFORCE=y
+-CONFIG_ALWAYS_PERMISSIVE=y
++CONFIG_ALWAYS_ENFORCE=y
++# CONFIG_ALWAYS_PERMISSIVE=y
+ CONFIG_SECURITY_SELINUX_AVC_STATS=y
+ CONFIG_SECURITY_SELINUX_CHECKREQPROT_VALUE=0
+ CONFIG_SECURITY_SELINUX_SIDTAB_HASH_BITS=9
+diff --git a/drivers/misc/mediatek/base/power/cpufreq_v1/src/mach/mt6768/mtk_cpufreq_opp_pv_table.h b/drivers/misc/mediatek/base/power/cpufreq_v1/src/mach/mt6768/mtk_cpufreq_opp_pv_table.h
+index 0a3e0e3e50e4..a7ea8dcf51e7 100644
+--- a/drivers/misc/mediatek/base/power/cpufreq_v1/src/mach/mt6768/mtk_cpufreq_opp_pv_table.h
++++ b/drivers/misc/mediatek/base/power/cpufreq_v1/src/mach/mt6768/mtk_cpufreq_opp_pv_table.h
+@@ -421,41 +421,41 @@ static unsigned int FY_G75Tbl[NR_FREQ * NR_MT_CPU_DVFS][ARRAY_COL_SIZE] = {
+ 	/* Freq, Vproc, post_div, clk_div */
+ 
+ 	/* L */
+-	{ 1800, 81, 1, 1 },
+-	{ 1625, 69, 2, 1 },
+-	{ 1500, 63, 2, 1 },
+-	{ 1450, 61, 2, 1 },
+-	{ 1375, 57, 2, 1 },
+-	{ 1325, 55, 2, 1 },
+-	{ 1275, 53, 2, 1 },
+-	{ 1175, 48, 2, 1 },
+-	{ 1100, 44, 2, 1 },
+-	{ 1050, 42, 2, 1 },
+-	{ 999, 39, 2, 1 },
+-	{ 950, 37, 2, 1 },
+-	{ 900, 35, 2, 1 },
+-	{ 850, 32, 4, 1 },
+-	{ 774, 28, 4, 1 },
+-	{ 500, 24, 4, 1 },
++	{ 2300, 81, 1, 1 },
++	{ 2133, 69, 1, 1 },
++	{ 2066, 63, 1, 1 },
++	{ 2000, 61, 1, 1 },
++	{ 1933, 57, 1, 1 },
++	{ 1866, 55, 1, 1 },
++	{ 1800, 53, 1, 1 },
++	{ 1681, 48, 2, 1 },
++	{ 1532, 44, 2, 1 },
++	{ 1473, 42, 2, 1 },
++	{ 1384, 39, 2, 1 },
++	{ 1295, 37, 2, 1 },
++	{ 1176, 35, 2, 1 },
++	{ 1057, 32, 2, 1 },
++	{ 939, 28, 2, 1 },
++	{ 850, 24, 2, 1 },
+ 
+ 
+ 
+     /* B */
+-	{ 2000, 94, 1, 1 },
+-	{ 1950, 92, 1, 1 },
+-	{ 1900, 90, 1, 1 },
+-	{ 1850, 88, 1, 1 },
+-	{ 1800, 85, 1, 1 },
+-	{ 1710, 80, 1, 1 },
+-	{ 1621, 75, 1, 1 },
+-	{ 1532, 69, 2, 1 },
+-	{ 1443, 64, 2, 1 },
+-	{ 1354, 59, 2, 1 },
+-	{ 1295, 55, 2, 1 },
+-	{ 1176, 48, 2, 1 },
+-	{ 1087, 43, 2, 1 },
+-	{ 998, 37, 2, 1 },
+-	{ 909, 32, 2, 1 },
++	{ 2500, 94, 1, 1 },
++	{ 2333, 92, 1, 1 },
++	{ 2166, 90, 1, 1 },
++	{ 2000, 88, 1, 1 },
++	{ 1933, 85, 1, 1 },
++	{ 1866, 80, 1, 1 },
++	{ 1800, 75, 1, 1 },
++	{ 1681, 69, 2, 1 },
++	{ 1532, 64, 2, 1 },
++	{ 1473, 59, 2, 1 },
++	{ 1384, 55, 2, 1 },
++	{ 1295, 48, 2, 1 },
++	{ 1176, 43, 2, 1 },
++	{ 1057, 37, 2, 1 },
++	{ 939, 32, 2, 1 },
+ 	{ 850, 28, 2, 1 },
+ 
+ 
+diff --git a/drivers/misc/mediatek/base/power/cpufreq_v1/src/mach/mt6768/mtk_cpufreq_opp_table.h b/drivers/misc/mediatek/base/power/cpufreq_v1/src/mach/mt6768/mtk_cpufreq_opp_table.h
+index f4c67bfb1f10..d3e4278919dd 100644
+--- a/drivers/misc/mediatek/base/power/cpufreq_v1/src/mach/mt6768/mtk_cpufreq_opp_table.h
++++ b/drivers/misc/mediatek/base/power/cpufreq_v1/src/mach/mt6768/mtk_cpufreq_opp_table.h
+@@ -670,41 +670,40 @@
+ 
+ /* G75 */
+ /* for DVFS OPP table L */
+-#define CPU_DVFS_FREQ0_LL_G75		1800000		/* KHz */
+-#define CPU_DVFS_FREQ1_LL_G75		1625000		/* KHz */
+-#define CPU_DVFS_FREQ2_LL_G75		1500000		/* KHz */
+-#define CPU_DVFS_FREQ3_LL_G75		1450000		/* KHz */
+-#define CPU_DVFS_FREQ4_LL_G75		1375000		/* KHz */
+-#define CPU_DVFS_FREQ5_LL_G75		1325000		/* KHz */
+-#define CPU_DVFS_FREQ6_LL_G75		1275000		/* KHz */
+-#define CPU_DVFS_FREQ7_LL_G75		1175000		/* KHz */
+-#define CPU_DVFS_FREQ8_LL_G75		1100000		/* KHz */
+-#define CPU_DVFS_FREQ9_LL_G75		1050000		/* KHz */
+-#define CPU_DVFS_FREQ10_LL_G75		999000		/* KHz */
+-#define CPU_DVFS_FREQ11_LL_G75		950000		/* KHz */
+-#define CPU_DVFS_FREQ12_LL_G75		900000		/* KHz */
+-#define CPU_DVFS_FREQ13_LL_G75		850000		/* KHz */
+-#define CPU_DVFS_FREQ14_LL_G75		774000		/* KHz */
+-#define CPU_DVFS_FREQ15_LL_G75		500000		/* KHz */
++#define CPU_DVFS_FREQ0_LL_G75		2300000		/* KHz */
++#define CPU_DVFS_FREQ1_LL_G75		2133000		/* KHz */
++#define CPU_DVFS_FREQ2_LL_G75		2066000		/* KHz */
++#define CPU_DVFS_FREQ3_LL_G75		2000000		/* KHz */
++#define CPU_DVFS_FREQ4_LL_G75		1933000		/* KHz */
++#define CPU_DVFS_FREQ5_LL_G75		1866000		/* KHz */
++#define CPU_DVFS_FREQ6_LL_G75		1800000		/* KHz */
++#define CPU_DVFS_FREQ7_LL_G75		1681000		/* KHz */
++#define CPU_DVFS_FREQ8_LL_G75		1532000		/* KHz */
++#define CPU_DVFS_FREQ9_LL_G75		1473000		/* KHz */
++#define CPU_DVFS_FREQ10_LL_G75		1384000		/* KHz */
++#define CPU_DVFS_FREQ11_LL_G75		1295000		/* KHz */
++#define CPU_DVFS_FREQ12_LL_G75		1176000		/* KHz */
++#define CPU_DVFS_FREQ13_LL_G75		1057000		/* KHz */
++#define CPU_DVFS_FREQ14_LL_G75		939000		/* KHz */
++#define CPU_DVFS_FREQ15_LL_G75		850000		/* KHz */
+ 
+ /* for DVFS OPP table B */
+-#define CPU_DVFS_FREQ0_L_G75		2000000		/* KHz */
+-#define CPU_DVFS_FREQ1_L_G75		1950000		/* KHz */
+-#define CPU_DVFS_FREQ2_L_G75		1900000		/* KHz */
+-#define CPU_DVFS_FREQ3_L_G75		1850000		/* KHz */
+-#define CPU_DVFS_FREQ4_L_G75		1800000		/* KHz */
+-#define CPU_DVFS_FREQ5_L_G75		1710000		/* KHz */
+-#define CPU_DVFS_FREQ6_L_G75		1621000		/* KHz */
+-#define CPU_DVFS_FREQ7_L_G75		1532000		/* KHz */
+-#define CPU_DVFS_FREQ8_L_G75		1443000		/* KHz */
+-#define CPU_DVFS_FREQ9_L_G75		1354000		/* KHz */
+-#define CPU_DVFS_FREQ10_L_G75		1295000		/* KHz */
+-#define CPU_DVFS_FREQ11_L_G75		1176000		/* KHz */
+-#define CPU_DVFS_FREQ12_L_G75		1087000		/* KHz */
+-#define CPU_DVFS_FREQ13_L_G75		998000		/* KHz */
+-#define CPU_DVFS_FREQ14_L_G75		909000		/* KHz */
++#define CPU_DVFS_FREQ0_L_G75		2500000		/* KHz */
++#define CPU_DVFS_FREQ1_L_G75		2333000		/* KHz */
++#define CPU_DVFS_FREQ2_L_G75		2166000		/* KHz */
++#define CPU_DVFS_FREQ3_L_G75		2000000		/* KHz */
++#define CPU_DVFS_FREQ4_L_G75		1933000		/* KHz */
++#define CPU_DVFS_FREQ5_L_G75		1866000		/* KHz */
++#define CPU_DVFS_FREQ6_L_G75		1800000		/* KHz */
++#define CPU_DVFS_FREQ7_L_G75		1681000		/* KHz */
++#define CPU_DVFS_FREQ8_L_G75		1532000		/* KHz */
++#define CPU_DVFS_FREQ9_L_G75		1473000		/* KHz */
++#define CPU_DVFS_FREQ10_L_G75		1384000		/* KHz */
++#define CPU_DVFS_FREQ11_L_G75		1295000		/* KHz */
++#define CPU_DVFS_FREQ12_L_G75		1176000		/* KHz */
++#define CPU_DVFS_FREQ13_L_G75		1057000		/* KHz */
++#define CPU_DVFS_FREQ14_L_G75		939000		/* KHz */
+ #define CPU_DVFS_FREQ15_L_G75		850000		/* KHz */
+-
+ /* for DVFS OPP table CCI */
+ #define CPU_DVFS_FREQ0_CCI_G75		1277000		/* KHz */
+ #define CPU_DVFS_FREQ1_CCI_G75		1120000		/* KHz */
+@@ -724,11 +723,11 @@
+ #define CPU_DVFS_FREQ15_CCI_G75	        500000		/* KHz */
+ 
+ /* for DVFS OPP table L */
+-#define CPU_DVFS_VOLT0_VPROC1_G75	100625		/* 10uV */
+-#define CPU_DVFS_VOLT1_VPROC1_G75	 93125		/* 10uV */
+-#define CPU_DVFS_VOLT2_VPROC1_G75	 89375		/* 10uV */
+-#define CPU_DVFS_VOLT3_VPROC1_G75	 88125		/* 10uV */
+-#define CPU_DVFS_VOLT4_VPROC1_G75	 85625		/* 10uV */
++#define CPU_DVFS_VOLT0_VPROC1_G75	103625		/* 10uV */
++#define CPU_DVFS_VOLT1_VPROC1_G75	 96125		/* 10uV */
++#define CPU_DVFS_VOLT2_VPROC1_G75	 92375		/* 10uV */
++#define CPU_DVFS_VOLT3_VPROC1_G75	 91125		/* 10uV */
++#define CPU_DVFS_VOLT4_VPROC1_G75	 88625		/* 10uV */
+ #define CPU_DVFS_VOLT5_VPROC1_G75	 84375		/* 10uV */
+ #define CPU_DVFS_VOLT6_VPROC1_G75	 83125		/* 10uV */
+ #define CPU_DVFS_VOLT7_VPROC1_G75	 80000		/* 10uV */
+@@ -742,11 +741,11 @@
+ #define CPU_DVFS_VOLT15_VPROC1_G75	 65000		/* 10uV */
+ 
+ /* for DVFS OPP table B */
+-#define CPU_DVFS_VOLT0_VPROC2_G75	108750		/* 10uV */
+-#define CPU_DVFS_VOLT1_VPROC2_G75	107500		/* 10uV */
+-#define CPU_DVFS_VOLT2_VPROC2_G75	106250		/* 10uV */
+-#define CPU_DVFS_VOLT3_VPROC2_G75	105000		/* 10uV */
+-#define CPU_DVFS_VOLT4_VPROC2_G75	103125		/* 10uV */
++#define CPU_DVFS_VOLT0_VPROC2_G75	109750		/* 10uV */
++#define CPU_DVFS_VOLT1_VPROC2_G75	108500		/* 10uV */
++#define CPU_DVFS_VOLT2_VPROC2_G75	107250		/* 10uV */
++#define CPU_DVFS_VOLT3_VPROC2_G75	106000		/* 10uV */
++#define CPU_DVFS_VOLT4_VPROC2_G75	105125		/* 10uV */
+ #define CPU_DVFS_VOLT5_VPROC2_G75	100000		/* 10uV */
+ #define CPU_DVFS_VOLT6_VPROC2_G75	 96875		/* 10uV */
+ #define CPU_DVFS_VOLT7_VPROC2_G75	 93125		/* 10uV */
+@@ -1084,6 +1083,12 @@ static struct mt_cpu_freq_method opp_tbl_method_CCI_PRO[] = {
+ static struct mt_cpu_freq_method opp_tbl_method_LL_G75[] = {
+ 	/* POS,	CLK */
+ 	FP(1,	1),
++	FP(1,	1),
++	FP(1,	1),
++	FP(1,	1),
++	FP(1,	1),
++	FP(1,	1),
++	FP(1,	1),
+ 	FP(2,	1),
+ 	FP(2,	1),
+ 	FP(2,	1),
+@@ -1093,12 +1098,6 @@ static struct mt_cpu_freq_method opp_tbl_method_LL_G75[] = {
+ 	FP(2,	1),
+ 	FP(2,	1),
+ 	FP(2,	1),
+-	FP(2,	1),
+-	FP(2,	1),
+-	FP(2,	1),
+-	FP(4,	1),
+-	FP(4,	1),
+-	FP(4,	1),
+ };
+ 
+ static struct mt_cpu_freq_method opp_tbl_method_L_G75[] = {
+diff --git a/drivers/misc/mediatek/base/power/mt6768/mtk_gpufreq_core.h b/drivers/misc/mediatek/base/power/mt6768/mtk_gpufreq_core.h
+index 49018be64033..d1b7e175a014 100644
+--- a/drivers/misc/mediatek/base/power/mt6768/mtk_gpufreq_core.h
++++ b/drivers/misc/mediatek/base/power/mt6768/mtk_gpufreq_core.h
+@@ -17,84 +17,101 @@
+ /**************************************************
+  * MT6768/MT6767 : GPU DVFS OPP table Setting
+  **************************************************/
+-#define SEG_GPU_DVFS_FREQ0			(1000000)	/* KHz */
+-#define SEG_GPU_DVFS_FREQ1			(975000)	/* KHz */
+-#define SEG_GPU_DVFS_FREQ2			(950000)	/* KHz */
+-#define SEG_GPU_DVFS_FREQ3			(925000)	/* KHz */
+-#define SEG_GPU_DVFS_FREQ4			(900000)	/* KHz */
+-#define SEG_GPU_DVFS_FREQ5			(875000)	/* KHz */
+-#define SEG_GPU_DVFS_FREQ6			(850000)	/* KHz */
+-#define SEG_GPU_DVFS_FREQ7			(823000)	/* KHz */
+-#define SEG_GPU_DVFS_FREQ8			(796000)	/* KHz */
+-#define SEG_GPU_DVFS_FREQ9			(769000)	/* KHz */
+-#define SEG_GPU_DVFS_FREQ10			(743000)	/* KHz */
+-#define SEG_GPU_DVFS_FREQ11			(716000)	/* KHz */
+-#define SEG_GPU_DVFS_FREQ12			(690000)	/* KHz */
+-#define SEG_GPU_DVFS_FREQ13			(663000)	/* KHz */
+-#define SEG_GPU_DVFS_FREQ14			(637000)	/* KHz */
+-#define SEG_GPU_DVFS_FREQ15			(611000)	/* KHz */
+-#define SEG_GPU_DVFS_FREQ16			(586000)	/* KHz */
+-#define SEG_GPU_DVFS_FREQ17			(560000)	/* KHz */
+-#define SEG_GPU_DVFS_FREQ18			(535000)	/* KHz */
+-#define SEG_GPU_DVFS_FREQ19			(509000)	/* KHz */
+-#define SEG_GPU_DVFS_FREQ20			(484000)	/* KHz */
+-#define SEG_GPU_DVFS_FREQ21			(467000)	/* KHz */
+-#define SEG_GPU_DVFS_FREQ22			(450000)	/* KHz */
+-#define SEG_GPU_DVFS_FREQ23			(434000)	/* KHz */
+-#define SEG_GPU_DVFS_FREQ24			(417000)	/* KHz */
+-#define SEG_GPU_DVFS_FREQ25			(400000)	/* KHz */
+-#define SEG_GPU_DVFS_FREQ26			(383000)	/* KHz */
+-#define SEG_GPU_DVFS_FREQ27			(366000)	/* KHz */
+-#define SEG_GPU_DVFS_FREQ28			(349000)	/* KHz */
+-#define SEG_GPU_DVFS_FREQ29			(332000)	/* KHz */
+-#define SEG_GPU_DVFS_FREQ30			(315000)	/* KHz */
+-#define SEG_GPU_DVFS_FREQ31			(299000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ0			(1200000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ1			(1175000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ2			(1150000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ3			(1125000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ4			(1100000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ5			(1075000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ6			(1050000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ7			(1025000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ8			(1000000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ9			(975000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ10			(950000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ11			(925000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ12			(900000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ13			(875000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ14			(850000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ15			(823000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ16			(796000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ17			(769000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ18			(743000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ19			(716000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ20			(690000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ21			(663000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ22			(637000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ23			(611000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ24			(586000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ25			(560000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ26			(535000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ27			(509000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ28			(484000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ29			(467000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ30			(450000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ31			(434000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ32			(417000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ33			(400000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ34			(383000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ35			(366000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ36			(349000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ37			(332000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ38			(315000)	/* KHz */
++#define SEG_GPU_DVFS_FREQ39			(299000)	/* KHz */
+ 
+-#define SEG_GPU_DVFS_VOLT0		(95000)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VOLT1		(92500)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VOLT2		(90000)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VOLT3		(87500)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VOLT4		(85000)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VOLT5		(82500)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VOLT6		(80000)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VOLT7		(79375)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VOLT8		(78125)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VOLT9		(76875)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VOLT10		(75625)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VOLT11		(75000)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VOLT12		(73750)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VOLT13		(72500)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VOLT14		(71250)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VOLT15		(70625)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VOLT16		(70000)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VOLT17		(69375)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VOLT18		(68750)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VOLT19		(68125)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VOLT20		(66875)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VOLT21		(66875)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VOLT22		(66250)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VOLT23		(65625)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VOLT24		(65000)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VOLT25		(64375)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VOLT26		(64375)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VOLT27		(63750)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VOLT28		(63125)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VOLT29		(62500)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VOLT30		(61875)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VOLT31		(61250)		/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT0		(115000)	/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT1		(112500)	/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT2		(110000)	/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT3		(107500)	/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT4		(105000)	/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT5		(102500)	/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT6		(100000)	/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT7		(97500)		/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT8		(95000)		/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT9		(92500)		/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT10		(90000)		/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT11		(87500)		/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT12		(85000)		/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT13		(82500)		/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT14		(80000)		/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT15		(79375)		/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT16		(78125)		/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT17		(76875)		/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT18		(75625)		/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT19		(75000)		/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT20		(73750)		/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT21		(72500)		/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT22		(71250)		/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT23		(70625)		/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT24		(70000)		/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT25		(69375)		/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT26		(68750)		/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT27		(68125)		/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT28		(66875)		/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT29		(66875)		/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT30		(66250)		/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT31		(65625)		/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT32		(65000)		/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT33		(64375)		/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT34		(64375)		/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT35		(63750)		/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT36		(63125)		/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT37		(62500)		/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT38		(61875)		/* mV x 100 */
++#define SEG_GPU_DVFS_VOLT39		(61250)		/* mV x 100 */
+ 
+-#define SEG_GPU_DVFS_VSRAM0		(105000)	/* mV x 100 */
+-#define SEG_GPU_DVFS_VSRAM1		(102500)	/* mV x 100 */
+-#define SEG_GPU_DVFS_VSRAM2		(100000)	/* mV x 100 */
+-#define SEG_GPU_DVFS_VSRAM3		(97500)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VSRAM4		(95000)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VSRAM5		(92500)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VSRAM6		(90000)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VSRAM7		(89375)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VSRAM8		(88125)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VSRAM9		(86875)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VSRAM10	(85625)		/* mV x 100 */
+-#define SEG_GPU_DVFS_VSRAM11	(85000)		/* mV x 100 */
++#define SEG_GPU_DVFS_VSRAM0		(115000)	/* mV x 100 */
++#define SEG_GPU_DVFS_VSRAM1		(105000)	/* mV x 100 */
++#define SEG_GPU_DVFS_VSRAM2		(102500)	/* mV x 100 */
++#define SEG_GPU_DVFS_VSRAM3		(100000)	/* mV x 100 */
++#define SEG_GPU_DVFS_VSRAM4		(97500)		/* mV x 100 */
++#define SEG_GPU_DVFS_VSRAM5		(95000)		/* mV x 100 */
++#define SEG_GPU_DVFS_VSRAM6		(92500)		/* mV x 100 */
++#define SEG_GPU_DVFS_VSRAM7		(90000)		/* mV x 100 */
++#define SEG_GPU_DVFS_VSRAM8		(89375)		/* mV x 100 */
++#define SEG_GPU_DVFS_VSRAM9		(88125)		/* mV x 100 */
++#define SEG_GPU_DVFS_VSRAM10		(86875)		/* mV x 100 */
++#define SEG_GPU_DVFS_VSRAM11	(85625)		/* mV x 100 */
++#define SEG_GPU_DVFS_VSRAM12	(85000)		/* mV x 100 */
+ 
+ #define FIXED_VSRAM_VOLT			(85000)		/* mV x 100 */
+ #define FIXED_VSRAM_VOLT_THSRESHOLD	(75000)		/* mV x 100 */
+@@ -107,7 +124,7 @@
+ #define DELAY_FACTOR		(625)
+ #define BUCK_DIFF_MAX		(25000)		/* mV x 100 */
+ #define BUCK_DIFF_MIN		(10000)		/* mV x 100 */
+-#define NUM_OF_OPP_IDX		(32)
++#define NUM_OF_OPP_IDX		(40)
+ 
+ /**************************************************
+  * efuse Setting
