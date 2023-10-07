@@ -18,8 +18,8 @@
  * MT6768/MT6767 : GPU DVFS OPP table Setting
  **************************************************/
 
-#define SEG_GPU_DVFS_FREQ0			(1100000)	/* KHz */
-#define SEG_GPU_DVFS_FREQ1			(1075000)	/* KHz */
+#define SEG_GPU_DVFS_FREQ0			(1150000)	/* KHz */
+#define SEG_GPU_DVFS_FREQ1			(1100000)	/* KHz */
 #define SEG_GPU_DVFS_FREQ2			(1050000)	/* KHz */
 #define SEG_GPU_DVFS_FREQ3			(1025000)	/* KHz */
 #define SEG_GPU_DVFS_FREQ4			(1000000)	/* KHz */
@@ -59,7 +59,7 @@
 #define SEG_GPU_DVFS_FREQ38                     (275000)        /* KHz */
 #define SEG_GPU_DVFS_FREQ39                     (255000)        /* KHz */
 
-#define SEG_GPU_DVFS_VOLT0		(97500)		/* mV x 100 */
+#define SEG_GPU_DVFS_VOLT0		(95500)		/* mV x 100 */
 #define SEG_GPU_DVFS_VOLT1		(95000)		/* mV x 100 */
 #define SEG_GPU_DVFS_VOLT2		(92500)		/* mV x 100 */
 #define SEG_GPU_DVFS_VOLT3		(90000)		/* mV x 100 */
