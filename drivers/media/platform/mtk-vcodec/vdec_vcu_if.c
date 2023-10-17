@@ -251,7 +251,8 @@ int vcu_dec_ipi_handler(void *data, unsigned int len, void *priv)
 		do_gettimeofday(&t_s);
 		ret = mtk_vcodec_wait_for_done_ctx(vcu->ctx,
 			msg->status,
-			MTK_INST_IRQ_RECEIVED);
+			MTK_INST_IRQ_RECEIVED,
+			WAIT_INTR_TIMEOUT_MS);
 		do_gettimeofday(&t_e);
 		mtk_vcodec_perf_log("irq:%ld",
 			(t_e.tv_sec - t_s.tv_sec) * 1000000 +

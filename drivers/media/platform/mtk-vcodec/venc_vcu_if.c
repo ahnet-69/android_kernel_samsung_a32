@@ -168,7 +168,8 @@ int vcu_enc_ipi_handler(void *data, unsigned int len, void *priv)
 		break;
 	case VCU_IPIMSG_ENC_WAIT_ISR:
 		if (-1 == mtk_vcodec_wait_for_done_ctx(ctx, 0,
-			MTK_INST_IRQ_RECEIVED)) {
+			MTK_INST_IRQ_RECEIVED,
+			WAIT_INTR_TIMEOUT_MS)) {
 			handle_enc_waitisr_msg(vcu, data, 1);
 			mtk_vcodec_debug(vcu,
 				"irq_status %x <-", ctx->irq_status);
