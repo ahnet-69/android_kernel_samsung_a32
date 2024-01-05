@@ -354,13 +354,8 @@ const struct cred *get_task_cred(struct task_struct *task)
 	do {
 		cred = __task_cred((task));
 		BUG_ON(!cred);
-<<<<<<< HEAD
-	} while (!atomic_inc_not_zero(&((struct cred *)cred)->usage));
+        } while (!atomic_long_inc_not_zero(&((struct cred *)cred)->usage));
 #endif
-=======
-	} while (!atomic_long_inc_not_zero(&((struct cred *)cred)->usage));
-
->>>>>>> eac54659ff77 (cred: switch to using atomic_long_t)
 	rcu_read_unlock();
 	return cred;
 }
@@ -732,7 +727,6 @@ int commit_creds(struct cred *new)
 	validate_creds(old);
 	validate_creds(new);
 #endif
-<<<<<<< HEAD
 #ifdef CONFIG_KDP_CRED
 	if (rkp_ro_page((unsigned long)new))
 		BUG_ON((rocred_uc_read(new)) < 1);
@@ -743,10 +737,7 @@ int commit_creds(struct cred *new)
 		BUG_ON(ROCRED_UC_READ(new) < 1);
 	else
 #endif
-	BUG_ON(atomic_read(&new->usage) < 1);
-=======
 	BUG_ON(atomic_long_read(&new->usage) < 1);
->>>>>>> eac54659ff77 (cred: switch to using atomic_long_t)
 
 	get_cred(new); /* we will require a ref for the subj creds too */
 
@@ -854,7 +845,6 @@ void abort_creds(struct cred *new)
 #ifdef CONFIG_DEBUG_CREDENTIALS
 	BUG_ON(read_cred_subscribers(new) != 0);
 #endif
-<<<<<<< HEAD
 #ifdef CONFIG_KDP_CRED
 	if (rkp_ro_page((unsigned long)new))
 		BUG_ON((rocred_uc_read(new)) < 1);
@@ -865,10 +855,7 @@ void abort_creds(struct cred *new)
 		BUG_ON(ROCRED_UC_READ(new) < 1);
 	else
 #endif
-	BUG_ON(atomic_read(&new->usage) < 1);
-=======
 	BUG_ON(atomic_long_read(&new->usage) < 1);
->>>>>>> eac54659ff77 (cred: switch to using atomic_long_t)
 	put_cred(new);
 }
 EXPORT_SYMBOL(abort_creds);
